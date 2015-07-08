@@ -1,0 +1,84 @@
+# Modify by applet on 2010-03-29
+if ( USE104 )
+  include "104.nodoka"
+  if ( USE109on104 )
+    include "109on104.nodoka"
+  endif
+else
+  include "109.nodoka"
+    if ( USE104on109 )
+    include "104on109.nodoka"
+  endif
+endif
+
+if ( USEdefault )
+  include "default2.nodoka"
+endif
+#-----------------------------------------------------------------------------------
+# 俺が使ってるキーボードの定義
+#def option UnitID = K1 0 0 0
+
+def option UnitID = K1 2131 256 0  #HHKB Pro
+def option UnitID = K2 3897 1649 0 # KBTalking pure pro 60%
+def option UnitID = K3 1133 49259 1
+def option UnitID = K4 1133 49714 0
+def option UnitID = K5 1133 50481 1
+
+keymap Global
+
+# CapsLockがあれば、Controlにする
+mod control += CapsLock
+key *CapsLock = *LeftControl
+
+
+# Win＋スペースでIME起動
+key W-Space = $ToggleIME
+
+# Win+Altでも、タスクスイッチする
+key W-Tab = A-Tab
+
+# 左側のWindowsキー殺す、WIndowsキーとして使わない。IME起動時に手が滑るとイライラするから
+key LWin =
+
+# [Change LeftControl modifier to M1( as real Modifier)]
+#mod C -= LCtrl
+#mod M1 = !LCtrl
+#key *S-M1-Left = *S-Home
+#key *S-M1-Right = *S-End
+
+# Windowsキーを通常のモディファイヤキーから、のどか内における真のモディファイヤキーとして登録
+mod W -= LWin
+mod M0 = !LWin
+key *S-M0-Tab = A-*S-Tab
+
+# [LAlt+space=IME]
+key M0-Space = $ToggleIME
+
+# [Vim like Cursor and Mac-like copy pasting]
+key *S-*C-M0-H = *S-*C-Left
+key *S-*C-M0-J = *S-*C-Down
+key *S-*C-M0-K = *S-*C-Up
+key *S-*C-M0-L = *S-*C-Right
+key *S-*C-M0-F = *S-*C-PageDown
+key *S-*C-K2-M0-B = *S-*C-PageUp
+key M0-O = Home Down
+key S-M0-O = Home Up
+
+key M0-C = C-C
+key M0-V = C-V
+key M0-X = C-X
+key M0-Z = C-Z
+key M0-Y = C-Y
+key M0-D = C-D
+key M0-S = C-S
+key M0-A = C-A
+key M0-F = C-F
+key M0-R = C-R
+key M0-W = C-W
+
+# [BackSpace = `] for  KB
+#key *S-BackSpace = *S-GraveAccent
+
+# [Delete = BackSpace]
+#key *S-*C-Delete = *S-*C-BackSpace
+
