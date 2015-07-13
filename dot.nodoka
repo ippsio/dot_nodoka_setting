@@ -35,11 +35,18 @@ key W-Space = $ToggleIME
 # [Ignore LeftWindows]
 key LWin =
 
-# 左Win、左Altを真のモディファイヤに。
-# これらのキーをカチカチ押しても、反応しなくなります。
+# 左Winを真のモディファイヤに。
+# 左Winキーをカチカチ押しても、反応しなくなります。
 # モディファイヤとしてしか使えないキーになります。
 mod W = !LWin
-mod A = !LAlt
+
+
+# 左Altを真のモディファイヤに。
+# 左Altキーをカチカチ押しても、反応しなくなります。
+# モディファイヤとしてしか使えないキーになります。
+# 右Altキーは普通のAltキーとして動作します。
+mod A = !LAlt RAlt
+
 
 key *S-W-Tab = A-*S-Tab
 
@@ -48,6 +55,8 @@ key *S-*C-W-H = *S-*C-Left
 key *S-*C-W-J = *S-*C-Down
 key *S-*C-W-K = *S-*C-Up
 key *S-*C-W-L = *S-*C-Right
+key *S-*C-W-_0 = *S-*C-Home # LWin+数字の0でHome
+key *S-*C-W-_4 = *S-*C-End  # LWin+数字の4でEnd
 
 # Win+Oで次の行の先頭に移動してみる
 key W-O = Home Down
