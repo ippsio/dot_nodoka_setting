@@ -23,6 +23,34 @@ def option UnitID = K3 1133 49259 1
 def option UnitID = K4 1133 49714 0
 def option UnitID = K5 1133 50481 1
 
+# &SetText(text)の遅延ms
+def option SendTextDelay = 1
+
+# オプション　IME オン/オフ時のキャレット点滅時間指定
+def option CaretBlinkTime = enable 500 125
+
+keymap2 KM_PREFIX_I
+# めんどいキー入力を少し楽に
+
+# 単純にキー入力版
+#key *W-P = &SendText("35Millionaire$")
+#key *W-M = &SendText("spx_shioiri@worksap.co.jp")
+# クリップボードを使う版
+#key *W-P = &ClipboardCopy("35Millionaire$")            &Sync C-V &Wait(5) &ClipboardCopy("")
+#key *W-M = &ClipboardCopy("spx_shioiri@worksap.co.jp") &Sync C-V &Wait(5) &ClipboardCopy("")
+# IMEをオフにしてキー入力版
+key *W-P = &SetImeStatus(off) &Sync &SendText("35Millionaire$")
+key *W-M = &SetImeStatus(off) &Sync &SendText("spx_shioiri@worksap.co.jp")
+
+# エクスプローラ開く
+key *W-E = W-E
+
+keymap2 KM_PREFIX_V
+# ウインドウの整列
+key W-V = &ShellExecute("open", "wsh\\tile_windows_v.vbs",,, showNormal)
+key W-H = &ShellExecute("open", "wsh\\tile_windows_h.vbs",,, showNormal)
+
+
 keymap Global
 
 # CapsLock = Control
@@ -41,39 +69,43 @@ key LWin =
 mod W = !LWin
 
 
-# 左Altを真のモディファイヤに。
-# 左Altキーをカチカチ押しても、反応しなくなります。
-# モディファイヤとしてしか使えないキーになります。
-# 右Altキーは普通のAltキーとして動作します。
-mod A = !LAlt RAlt
+### 左Altを真のモディファイヤに。
+### 左Altキーをカチカチ押しても、反応しなくなります。
+### モディファイヤとしてしか使えないキーになります。
+### 右Altキーは普通のAltキーとして動作します。
+##mod A = !LAlt RAlt
 
+## Win+` で画面ロックできるようにする
+Key W-GraveAccent = W-L
 
-key *S-W-Tab = A-*S-Tab
-
-# VIMっぽいカーソル操作ができるようにする。
+## VIMっぽいカーソル操作ができるようにする。
 key *S-*C-W-H = *S-*C-Left
 key *S-*C-W-J = *S-*C-Down
 key *S-*C-W-K = *S-*C-Up
 key *S-*C-W-L = *S-*C-Right
-key *S-*C-W-_0 = *S-*C-Home # LWin+数字の0でHome
-key *S-*C-W-_4 = *S-*C-End  # LWin+数字の4でEnd
+key *S-*C-W-_1 = *S-*C-F1
+key *S-*C-W-_2 = *S-*C-F2
+key *S-*C-W-_3 = *S-*C-F3
+key *S-*C-W-_4 = *S-*C-F4
+key *S-*C-W-_5 = *S-*C-F5
+key *S-*C-W-_6 = *S-*C-F6
+key *S-*C-W-_7 = *S-*C-F7
+key *S-*C-W-_8 = *S-*C-F8
+key *S-*C-W-_9 = *S-*C-F9
+key *S-*C-W-_0 = *S-*C-F10
+key *S-*C-W-_0 = *S-*C-F11
+key *S-*C-W-_0 = *S-*C-F12
 
-# Win+Oで次の行の先頭に移動してみる
-key W-O = Home Down
-key S-W-O = Home Up
+# 
+key W-W = A
+key *S-*C-W-_0 = *S-*C-F12
 
-# ちょっとMacっぽいキーバインドを追加してみる。
-key W-C = C-C
-key W-V = C-V
-key W-X = C-X
 
-key W-Z = C-Z
-key W-Y = C-Y
+# emacsっぽいカーソル操作
+key *S-*C-W-A = *S-*C-Home # LWin+AでHome
+key *S-*C-W-E = *S-*C-End  # LWin+EでEnd
+key W-D = Delete  # LWin+EでDelete
 
-key W-A = C-A
-key W-S = C-S
-key W-D = C-D
-key W-F = C-F
-
-key W-R = C-R
-key W-W = C-W
+# 2ストローク系 
+key W-I = &Prefix(KM_PREFIX_I)
+key W-V = &Prefix(KM_PREFIX_V)
