@@ -24,7 +24,7 @@ def option UnitID = K4 1133 49714 0
 def option UnitID = K5 1133 50481 1
 
 # &SetText(text)の遅延ms
-def option SendTextDelay = 1
+def option SendTextDelay = 2
 
 # オプション　IME オン/オフ時のキャレット点滅時間指定
 def option CaretBlinkTime = enable 500 125
