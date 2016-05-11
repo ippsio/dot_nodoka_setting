@@ -33,17 +33,17 @@ keymap2 KM_PREFIX_I
 # めんどいキー入力を少し楽に
 
 # 単純にキー入力版
-#key *W-P = &SendText("35Millionaire$")
-#key *W-M = &SendText("spx_shioiri@worksap.co.jp")
+#key *W-P = &SendText("ぱすわーど")
+#key *W-M = &SendText("めーるあどれす")
 # クリップボードを使う版
-#key *W-P = &ClipboardCopy("35Millionaire$")            &Sync C-V &Wait(5) &ClipboardCopy("")
-#key *W-M = &ClipboardCopy("spx_shioiri@worksap.co.jp") &Sync C-V &Wait(5) &ClipboardCopy("")
+#key *W-P = &ClipboardCopy("ぱすわーど")            &Sync C-V &Wait(5) &ClipboardCopy("")
+#key *W-M = &ClipboardCopy("めーるあどれす") &Sync C-V &Wait(5) &ClipboardCopy("")
 # IMEをオフにしてキー入力版
-#key *W-P = &SetImeStatus(off) &Sync &SendText("35Millionaire$")
-#key *W-M = &SetImeStatus(off) &Sync &SendText("spx_shioiri@worksap.co.jp")
+#key *W-P = &SetImeStatus(off) &Sync &SendText("ぱすわーど")
+#key *W-M = &SetImeStatus(off) &Sync &SendText("めーるあどれす")
 # SendText使わない版(FireFoxとSendTextが相性良くない、いくつかキー入力が抜けることがある）
-key *W-P = _3 &Sync _5 &Sync S-M &Sync i &Sync l &Sync l &Sync i &Sync o &Sync n &Sync a &Sync i &Sync r &Sync e &Sync S-_4
-key *W-M = s &Sync p &Sync x &Sync S-HyphenMinus &Sync s &Sync h &Sync i &Sync o &Sync i &Sync r &Sync i &Sync S-_2 &Sync w &Sync o &Sync r &Sync k &Sync s &Sync a &Sync p &Sync Period &Sync c &Sync o &Sync Period &Sync j &Sync p
+key *W-P = P &Sync A &Sync S &Sync S &Sync W &Sync O &Sync R &Sync D
+key *W-M = M &Sync A &Sync I &Sync L &Sync A &Sync D &Sync D &Sync R &Sync E &Sync S
 
 # エクスプローラ開く
 key *W-E = W-E
