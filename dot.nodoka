@@ -23,33 +23,33 @@ def option UnitID = K3 1133 49259 1
 def option UnitID = K4 1133 49714 0
 def option UnitID = K5 1133 50481 1
 
-# &SetText(text)‚Ì’x‰„ms
+# &SetText(text)ã®é…å»¶ms
 def option SendTextDelay = 10
 
-# ƒIƒvƒVƒ‡ƒ“@IME ƒIƒ“/ƒIƒt‚ÌƒLƒƒƒŒƒbƒg“_–ÅŠÔw’è
+# ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã€€IME ã‚ªãƒ³/ã‚ªãƒ•æ™‚ã®ã‚­ãƒ£ãƒ¬ãƒƒãƒˆç‚¹æ»…æ™‚é–“æŒ‡å®š
 def option CaretBlinkTime = enable 500 125
 
 keymap2 KM_PREFIX_I
-# ‚ß‚ñ‚Ç‚¢ƒL[“ü—Í‚ğ­‚µŠy‚É
+# ã‚ã‚“ã©ã„ã‚­ãƒ¼å…¥åŠ›ã‚’å°‘ã—æ¥½ã«
 
-# ’Pƒ‚ÉƒL[“ü—Í”Å
+# å˜ç´”ã«ã‚­ãƒ¼å…¥åŠ›ç‰ˆ
 #key *W-P = &SendText("35Millionaire$")
 #key *W-M = &SendText("spx_shioiri@worksap.co.jp")
-# ƒNƒŠƒbƒvƒ{[ƒh‚ğg‚¤”Å
+# ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã‚’ä½¿ã†ç‰ˆ
 #key *W-P = &ClipboardCopy("35Millionaire$")            &Sync C-V &Wait(5) &ClipboardCopy("")
 #key *W-M = &ClipboardCopy("spx_shioiri@worksap.co.jp") &Sync C-V &Wait(5) &ClipboardCopy("")
-# IME‚ğƒIƒt‚É‚µ‚ÄƒL[“ü—Í”Å
+# IMEã‚’ã‚ªãƒ•ã«ã—ã¦ã‚­ãƒ¼å…¥åŠ›ç‰ˆ
 #key *W-P = &SetImeStatus(off) &Sync &SendText("35Millionaire$")
 #key *W-M = &SetImeStatus(off) &Sync &SendText("spx_shioiri@worksap.co.jp")
-# SendTextg‚í‚È‚¢”Å(FireFox‚ÆSendText‚ª‘Š«—Ç‚­‚È‚¢A‚¢‚­‚Â‚©ƒL[“ü—Í‚ª”²‚¯‚é‚±‚Æ‚ª‚ ‚éj
+# SendTextä½¿ã‚ãªã„ç‰ˆ(FireFoxã¨SendTextãŒç›¸æ€§è‰¯ããªã„ã€ã„ãã¤ã‹ã‚­ãƒ¼å…¥åŠ›ãŒæŠœã‘ã‚‹ã“ã¨ãŒã‚ã‚‹ï¼‰
 key *W-P = _3 &Sync _5 &Sync S-M &Sync i &Sync l &Sync l &Sync i &Sync o &Sync n &Sync a &Sync i &Sync r &Sync e &Sync S-_4
 key *W-M = s &Sync p &Sync x &Sync S-HyphenMinus &Sync s &Sync h &Sync i &Sync o &Sync i &Sync r &Sync i &Sync S-_2 &Sync w &Sync o &Sync r &Sync k &Sync s &Sync a &Sync p &Sync Period &Sync c &Sync o &Sync Period &Sync j &Sync p
 
-# ƒGƒNƒXƒvƒ[ƒ‰ŠJ‚­
+# ã‚¨ã‚¯ã‚¹ãƒ—ãƒ­ãƒ¼ãƒ©é–‹ã
 key *W-E = W-E
 
 keymap2 KM_PREFIX_V
-# ƒEƒCƒ“ƒhƒE‚Ì®—ñ
+# ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®æ•´åˆ—
 key W-V = &ShellExecute("open", "wsh\\tile_windows_v.vbs",,, showNormal)
 key W-H = &ShellExecute("open", "wsh\\tile_windows_h.vbs",,, showNormal)
 
@@ -60,43 +60,37 @@ keymap Global
 mod control += CapsLock
 key *CapsLock = *LeftControl
 
-# Shift2‰ñ‰Ÿ‚µ‚ÅIME‚ÌØ‚è‘Ö‚¦
+# Shift2å›æŠ¼ã—ã§IMEã®åˆ‡ã‚Šæ›¿ãˆ
 def option UseDoublePress = enable 300 10
 key U-DP-LShift = &SetImeStatus(toggle)
 key U-DP-RShift = &SetImeStatus(toggle)
 
-# [WindowsƒL[‚Ì’²‹³]
-# RWin
-# RWin‚ÌŠ„“–‚Ä‚ğíœ‚µAƒ‚ƒfƒBƒtƒ@ƒCƒ„‚ğÄŠ„“–‚Ä‚·‚éB
-key RWin = 
-mod W -= RWin
-mod M0 = RWin
+# =======================================================================================================================
+# [Windowsã‚­ãƒ¼ã®èª¿æ•™]
+# =======================================================================================================================
+# LWin
+mod W -= LWin
+mod M0 = !LWin #çœŸã®ãƒ¢ãƒ‡ã‚£ãƒ•ã‚¡ã‚¤ãƒ¤ã«
 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-A = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-B = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-A = *S-*C-Home     # emacsã£ã½ã„ã‚«ãƒ¼ã‚½ãƒ«æ“ä½œ
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-B = *S-*C-PageUp   # vimã£ã½ã„ã‚«ãƒ¼ã‚½ãƒ«æ“ä½œ
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-C = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-Comma = *S-*C-Down
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-D = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-E = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-F = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-D = *S-*C-Delete
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-E = *S-*C-End      # emacsã£ã½ã„ã‚«ãƒ¼ã‚½ãƒ«æ“ä½œ
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-F = *S-*C-PageDown
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-G = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-H = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-I = $ToggleIME
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-J = *S-*C-Home
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-K = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-K = *S-*C-Left
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-L     = *S-*C-Right
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-M = $ToggleIME
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-H = *S-*C-Left     # vimã£ã½ã„ã‚«ãƒ¼ã‚½ãƒ«æ“ä½œ
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-I = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-J = *S-*C-Down     # vimã£ã½ã„ã‚«ãƒ¼ã‚½ãƒ«æ“ä½œ
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-K = *S-*C-Up       # vimã£ã½ã„ã‚«ãƒ¼ã‚½ãƒ«æ“ä½œ
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-L = *S-*C-Right    # vimã£ã½ã„ã‚«ãƒ¼ã‚½ãƒ«æ“ä½œ
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-M = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-N = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-O = *S-*C-Up
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-O = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-P = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-Period = $ToggleIME
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-Q = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-Quote = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-R = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-S = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-Semicolon = *S-*C-End
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-Slash = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-T = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-U = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-V = 
@@ -105,46 +99,51 @@ key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-X =
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-Y = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-Z = 
 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_1 = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_2 = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_3 = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_4 = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_5 = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_6 = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_7 = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_8 = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_9 = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_0 = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_1 = *S-*C-F1
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_2 = *S-*C-F2
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_3 = *S-*C-F3
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_4 = *S-*C-F4
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_5 = *S-*C-F5
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_6 = *S-*C-F6
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_7 = *S-*C-F7
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_8 = *S-*C-F8
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_9 = *S-*C-F9
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_0 = *S-*C-F10
 
-key *S-*C-M0-GraveAccent = W-L
+key M0-Space = $ToggleIME
 
-# LWin
-mod W -= LWin
-mod M1 = LWin
-# 1“x‰Ÿ‚µ‚Í–³‹‚·‚éB‚Æ‚¢‚¤‚©ƒ‚ƒfƒBƒtƒ@ƒCƒ„‚Æ‚µ‚Äg‚¦‚é‚æ‚¤‚É‚·‚éB
-# 2“x‰Ÿ‚µ‚Å‰‚ß‚ÄWindowsƒL[‚ª‰Ÿ‚³‚ê‚½‚à‚Ì‚Æ‚·‚éB
-key ~DP-LWin = &Ignore
-key U-DP-LWin = LWin
+# =======================================================================================================================
+# RWin
+# RWinã®å‰²å½“ã¦ã‚’å‰Šé™¤ã—ã€ãƒ¢ãƒ‡ã‚£ãƒ•ã‚¡ã‚¤ãƒ¤ã‚’å†å‰²å½“ã¦ã™ã‚‹ã€‚
+key RWin = 
+mod W -= RWin
+mod M1 = RWin # å³ã¯çœŸã®ãƒ¢ãƒ‡ã‚£ãƒ•ã‚¡ã‚¤ãƒ¤ã«ã¯ã—ãªã„
 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-A = *S-*C-Home     # emacs‚Á‚Û‚¢ƒJ[ƒ\ƒ‹‘€ì
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-B = *S-*C-PageUp   # vim‚Á‚Û‚¢ƒJ[ƒ\ƒ‹‘€ì
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-A = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-B = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-C = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-D = *S-*C-Delete
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-E = *S-*C-End      # emacs‚Á‚Û‚¢ƒJ[ƒ\ƒ‹‘€ì
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-F = *S-*C-PageDown
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Comma = *S-*C-Down
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-D = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-E = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-F = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-G = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-H = *S-*C-Left     # vim‚Á‚Û‚¢ƒJ[ƒ\ƒ‹‘€ì
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-I = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-J = *S-*C-Down     # vim‚Á‚Û‚¢ƒJ[ƒ\ƒ‹‘€ì
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-K = *S-*C-Up       # vim‚Á‚Û‚¢ƒJ[ƒ\ƒ‹‘€ì
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-L = *S-*C-Right    # vim‚Á‚Û‚¢ƒJ[ƒ\ƒ‹‘€ì
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-M = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-H = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-I = $ToggleIME
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-J = *S-*C-Home
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-K = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-K = *S-*C-Left
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-L     = *S-*C-Right
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-M = $ToggleIME
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-N = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-O = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-O = *S-*C-Up
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-P = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Period = $ToggleIME
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Q = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Quote = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-R = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-S = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Semicolon = *S-*C-End
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Slash = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-T = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-U = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-V = 
@@ -153,19 +152,26 @@ key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-X =
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Y = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Z = 
 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_1 = *S-*C-F1
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_2 = *S-*C-F2
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_3 = *S-*C-F3
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_4 = *S-*C-F4
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_5 = *S-*C-F5
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_6 = *S-*C-F6
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_7 = *S-*C-F7
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_8 = *S-*C-F8
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_9 = *S-*C-F9
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_0 = *S-*C-F10
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_1 = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_2 = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_3 = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_4 = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_5 = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_6 = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_7 = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_8 = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_9 = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_0 = 
 
-key M1-Space = $ToggleIME
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-GraveAccent = W-L
 
-# 2ƒXƒgƒ[ƒNŒn 
-key M1-I = &Prefix(KM_PREFIX_I)
-key M1-V = &Prefix(KM_PREFIX_V)
+# LWin+RWinåˆã‚ã›æŠ€ç³»
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-RWin = RWin # LWin + RWin = Windowsã‚­ãƒ¼ã®æŠ¼ä¸‹ï¼ˆã‚¹ã‚¿ãƒ¼ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’é–‹ãï¼‰
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-M1-E = W-E  # LWin+RWin+E = ã‚¨ã‚¯ã‚¹ãƒ—ãƒ­ãƒ¼ãƒ©é–‹ã
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-M1-R = W-R  # LWin+RWin+R = ãƒ•ã‚¡ã‚¤ãƒ«åã‚’æŒ‡å®šã—ã¦å®Ÿè¡Œ
+
+# =======================================================================================================================
+# 2ã‚¹ãƒˆãƒ­ãƒ¼ã‚¯ç³» 
+key M0-I = &Prefix(KM_PREFIX_I)
+key M0-V = &Prefix(KM_PREFIX_V)
+
