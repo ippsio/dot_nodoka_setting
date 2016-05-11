@@ -23,30 +23,34 @@ def option UnitID = K3 1133 49259 1
 def option UnitID = K4 1133 49714 0
 def option UnitID = K5 1133 50481 1
 
-# &SetText(text)ã®é…å»¶ms
-def option SendTextDelay = 2
+# &SetText(text)‚Ì’x‰„ms
+def option SendTextDelay = 10
 
-# ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã€€IME ã‚ªãƒ³/ã‚ªãƒ•æ™‚ã®ã‚­ãƒ£ãƒ¬ãƒƒãƒˆç‚¹æ»…æ™‚é–“æŒ‡å®š
+# ƒIƒvƒVƒ‡ƒ“@IME ƒIƒ“/ƒIƒt‚ÌƒLƒƒƒŒƒbƒg“_–ÅŠÔw’è
 def option CaretBlinkTime = enable 500 125
 
 keymap2 KM_PREFIX_I
-# ã‚ã‚“ã©ã„ã‚­ãƒ¼å…¥åŠ›ã‚’å°‘ã—æ¥½ã«
+# ‚ß‚ñ‚Ç‚¢ƒL[“ü—Í‚ğ­‚µŠy‚É
 
-# å˜ç´”ã«ã‚­ãƒ¼å…¥åŠ›ç‰ˆ
+# ’Pƒ‚ÉƒL[“ü—Í”Å
 #key *W-P = &SendText("35Millionaire$")
 #key *W-M = &SendText("spx_shioiri@worksap.co.jp")
-# ã‚¯ãƒªãƒƒãƒ—ãƒœãƒ¼ãƒ‰ã‚’ä½¿ã†ç‰ˆ
+# ƒNƒŠƒbƒvƒ{[ƒh‚ğg‚¤”Å
 #key *W-P = &ClipboardCopy("35Millionaire$")            &Sync C-V &Wait(5) &ClipboardCopy("")
 #key *W-M = &ClipboardCopy("spx_shioiri@worksap.co.jp") &Sync C-V &Wait(5) &ClipboardCopy("")
-# IMEã‚’ã‚ªãƒ•ã«ã—ã¦ã‚­ãƒ¼å…¥åŠ›ç‰ˆ
-key *W-P = &SetImeStatus(off) &Sync &SendText("35Millionaire$")
-key *W-M = &SetImeStatus(off) &Sync &SendText("spx_shioiri@worksap.co.jp")
+# IME‚ğƒIƒt‚É‚µ‚ÄƒL[“ü—Í”Å
+#key *W-P = &SetImeStatus(off) &Sync &SendText("35Millionaire$")
+#key *W-M = &SetImeStatus(off) &Sync &SendText("spx_shioiri@worksap.co.jp")
+# SendTextg‚í‚È‚¢”Å(FireFox‚ÆSendText‚ª‘Š«—Ç‚­‚È‚¢A‚¢‚­‚Â‚©ƒL[“ü—Í‚ª”²‚¯‚é‚±‚Æ‚ª‚ ‚éj
+key *W-P = _3 &Sync _5 &Sync S-M &Sync i &Sync l &Sync l &Sync i &Sync o &Sync n &Sync a &Sync i &Sync r &Sync e &Sync S-_4
+key *W-M = s &Sync p &Sync x &Sync S-HyphenMinus &Sync s &Sync h &Sync i &Sync o &Sync i &Sync r &Sync i &Sync S-_2 &Sync w &Sync o &Sync r &Sync k &Sync s &Sync a &Sync p &Sync Period &Sync c &Sync o &Sync Period &Sync j &Sync p
 
-# ã‚¨ã‚¯ã‚¹ãƒ—ãƒ­ãƒ¼ãƒ©é–‹ã
+
+# ƒGƒNƒXƒvƒ[ƒ‰ŠJ‚­
 key *W-E = W-E
 
 keymap2 KM_PREFIX_V
-# ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®æ•´åˆ—
+# ƒEƒCƒ“ƒhƒE‚Ì®—ñ
 key W-V = &ShellExecute("open", "wsh\\tile_windows_v.vbs",,, showNormal)
 key W-H = &ShellExecute("open", "wsh\\tile_windows_h.vbs",,, showNormal)
 
@@ -57,55 +61,113 @@ keymap Global
 mod control += CapsLock
 key *CapsLock = *LeftControl
 
-# [Win+space=IME]
-key W-Space = $ToggleIME
+# Shift2‰ñ‰Ÿ‚µ‚ÅIME‚ÌØ‚è‘Ö‚¦
+def option UseDoublePress = enable 300 10
+key U-DP-LShift = &SetImeStatus(toggle)
+key U-DP-RShift = &SetImeStatus(toggle)
 
-# [Ignore LeftWindows]
-key LWin =
+# [WindowsƒL[‚Ì’²‹³]
+# RWin
+# RWin‚ÌŠ„“–‚Ä‚ğíœ‚µAƒ‚ƒfƒBƒtƒ@ƒCƒ„‚ğÄŠ„“–‚Ä‚·‚éB
+key RWin = 
+mod W -= RWin
+mod M0 = RWin
 
-# å·¦Winã‚’çœŸã®ãƒ¢ãƒ‡ã‚£ãƒ•ã‚¡ã‚¤ãƒ¤ã«ã€‚
-# å·¦Winã‚­ãƒ¼ã‚’ã‚«ãƒã‚«ãƒæŠ¼ã—ã¦ã‚‚ã€åå¿œã—ãªããªã‚Šã¾ã™ã€‚
-# ãƒ¢ãƒ‡ã‚£ãƒ•ã‚¡ã‚¤ãƒ¤ã¨ã—ã¦ã—ã‹ä½¿ãˆãªã„ã‚­ãƒ¼ã«ãªã‚Šã¾ã™ã€‚
-mod W = !LWin
+key *S-*C-M0-A = 
+key *S-*C-M0-B = 
+key *S-*C-M0-C = 
+key *S-*C-M0-Comma = *S-*C-Down
+key *S-*C-M0-D = 
+key *S-*C-M0-E = 
+key *S-*C-M0-F = 
+key *S-*C-M0-G = 
+key *S-*C-M0-H = 
+key *S-*C-M0-I = $ToggleIME
+key *S-*C-M0-J = *S-*C-Home
+key *S-*C-M0-K = 
+key *S-*C-M0-K = *S-*C-Left
+key *S-*C-M0-L     = *S-*C-Right
+key *S-*C-M0-M = $ToggleIME
+key *S-*C-M0-N = 
+key *S-*C-M0-O = *S-*C-Up
+key *S-*C-M0-P = 
+key *S-*C-M0-Period = $ToggleIME
+key *S-*C-M0-Q = 
+key *S-*C-M0-Quote = 
+key *S-*C-M0-R = 
+key *S-*C-M0-S = 
+key *S-*C-M0-Semicolon = *S-*C-End
+key *S-*C-M0-Slash = 
+key *S-*C-M0-T = 
+key *S-*C-M0-U = 
+key *S-*C-M0-V = 
+key *S-*C-M0-W = 
+key *S-*C-M0-X = 
+key *S-*C-M0-Y = 
+key *S-*C-M0-Z = 
+
+key *S-*C-M0-_1 = 
+key *S-*C-M0-_2 = 
+key *S-*C-M0-_3 = 
+key *S-*C-M0-_4 = 
+key *S-*C-M0-_5 = 
+key *S-*C-M0-_6 = 
+key *S-*C-M0-_7 = 
+key *S-*C-M0-_8 = 
+key *S-*C-M0-_9 = 
+key *S-*C-M0-_0 = 
+
+key *S-*C-M0-GraveAccent = W-L
 
 
-### å·¦Altã‚’çœŸã®ãƒ¢ãƒ‡ã‚£ãƒ•ã‚¡ã‚¤ãƒ¤ã«ã€‚
-### å·¦Altã‚­ãƒ¼ã‚’ã‚«ãƒã‚«ãƒæŠ¼ã—ã¦ã‚‚ã€åå¿œã—ãªããªã‚Šã¾ã™ã€‚
-### ãƒ¢ãƒ‡ã‚£ãƒ•ã‚¡ã‚¤ãƒ¤ã¨ã—ã¦ã—ã‹ä½¿ãˆãªã„ã‚­ãƒ¼ã«ãªã‚Šã¾ã™ã€‚
-### å³Altã‚­ãƒ¼ã¯æ™®é€šã®Altã‚­ãƒ¼ã¨ã—ã¦å‹•ä½œã—ã¾ã™ã€‚
-##mod A = !LAlt RAlt
+# LWin
+mod W -= LWin
+mod M1 = LWin
+# 1“x‰Ÿ‚µ‚Í–³‹‚·‚éB‚Æ‚¢‚¤‚©ƒ‚ƒfƒBƒtƒ@ƒCƒ„‚Æ‚µ‚Äg‚¦‚é‚æ‚¤‚É‚·‚éB
+# 2“x‰Ÿ‚µ‚Å‰‚ß‚ÄWindowsƒL[‚ª‰Ÿ‚³‚ê‚½‚à‚Ì‚Æ‚·‚éB
+key ~DP-LWin = &Ignore
+key U-DP-LWin = LWin
 
-## Win+` ã§ç”»é¢ãƒ­ãƒƒã‚¯ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
-Key W-GraveAccent = W-L
+key *S-*C-M1-A = *S-*C-Home     # emacs‚Á‚Û‚¢ƒJ[ƒ\ƒ‹‘€ì
+key *S-*C-M1-B = *S-*C-PageUp   # vim‚Á‚Û‚¢ƒJ[ƒ\ƒ‹‘€ì
+key *S-*C-M1-C = 
+key *S-*C-M1-D = *S-*C-Delete
+key *S-*C-M1-E = *S-*C-End      # emacs‚Á‚Û‚¢ƒJ[ƒ\ƒ‹‘€ì
+key *S-*C-M1-F = *S-*C-PageDown
+key *S-*C-M1-G = 
+key *S-*C-M1-H = *S-*C-Left     # vim‚Á‚Û‚¢ƒJ[ƒ\ƒ‹‘€ì
+key *S-*C-M1-I = 
+key *S-*C-M1-J = *S-*C-Down     # vim‚Á‚Û‚¢ƒJ[ƒ\ƒ‹‘€ì
+key *S-*C-M1-K = *S-*C-Up       # vim‚Á‚Û‚¢ƒJ[ƒ\ƒ‹‘€ì
+key *S-*C-M1-L = *S-*C-Right    # vim‚Á‚Û‚¢ƒJ[ƒ\ƒ‹‘€ì
+key *S-*C-M1-M = 
+key *S-*C-M1-N = 
+key *S-*C-M1-O = 
+key *S-*C-M1-P = 
+key *S-*C-M1-Q = 
+key *S-*C-M1-R = 
+key *S-*C-M1-S = 
+key *S-*C-M1-T = 
+key *S-*C-M1-U = 
+key *S-*C-M1-V = 
+key *S-*C-M1-W = 
+key *S-*C-M1-X = 
+key *S-*C-M1-Y = 
+key *S-*C-M1-Z = 
 
-## VIMã£ã½ã„ã‚«ãƒ¼ã‚½ãƒ«æ“ä½œãŒã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹ã€‚
-key *S-*C-W-H = *S-*C-Left
-key *S-*C-W-J = *S-*C-Down
-key *S-*C-W-K = *S-*C-Up
-key *S-*C-W-L = *S-*C-Right
-key *S-*C-W-_1 = *S-*C-F1
-key *S-*C-W-_2 = *S-*C-F2
-key *S-*C-W-_3 = *S-*C-F3
-key *S-*C-W-_4 = *S-*C-F4
-key *S-*C-W-_5 = *S-*C-F5
-key *S-*C-W-_6 = *S-*C-F6
-key *S-*C-W-_7 = *S-*C-F7
-key *S-*C-W-_8 = *S-*C-F8
-key *S-*C-W-_9 = *S-*C-F9
-key *S-*C-W-_0 = *S-*C-F10
-key *S-*C-W-_0 = *S-*C-F11
-key *S-*C-W-_0 = *S-*C-F12
+key *S-*C-M1-_1 = *S-*C-F1
+key *S-*C-M1-_2 = *S-*C-F2
+key *S-*C-M1-_3 = *S-*C-F3
+key *S-*C-M1-_4 = *S-*C-F4
+key *S-*C-M1-_5 = *S-*C-F5
+key *S-*C-M1-_6 = *S-*C-F6
+key *S-*C-M1-_7 = *S-*C-F7
+key *S-*C-M1-_8 = *S-*C-F8
+key *S-*C-M1-_9 = *S-*C-F9
+key *S-*C-M1-_0 = *S-*C-F10
 
-# 
-key W-W = A
-key *S-*C-W-_0 = *S-*C-F12
+key M1-Space = $ToggleIME
 
-
-# emacsã£ã½ã„ã‚«ãƒ¼ã‚½ãƒ«æ“ä½œ
-key *S-*C-W-A = *S-*C-Home # LWin+Aã§Home
-key *S-*C-W-E = *S-*C-End  # LWin+Eã§End
-key W-D = Delete  # LWin+Eã§Delete
-
-# 2ã‚¹ãƒˆãƒ­ãƒ¼ã‚¯ç³» 
-key W-I = &Prefix(KM_PREFIX_I)
-key W-V = &Prefix(KM_PREFIX_V)
+# 2ƒXƒgƒ[ƒNŒn 
+key M1-I = &Prefix(KM_PREFIX_I)
+key M1-V = &Prefix(KM_PREFIX_V)
