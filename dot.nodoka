@@ -29,21 +29,27 @@ def option SendTextDelay = 10
 # オプション　IME オン/オフ時のキャレット点滅時間指定
 def option CaretBlinkTime = enable 500 125
 
+# キーリピート設定(可否、リピート開始までの時間[ms]、および、キーリピート開始後のリピート間隔[ms]）
+def option KeyboardDelay = enable 200 27
+
 keymap2 KM_PREFIX_I
 # めんどいキー入力を少し楽に
 
 # 単純にキー入力版
-#key *W-P = &SendText("ぱすわーど")
-#key *W-M = &SendText("めーるあどれす")
+#key *W-P = &SendText("password")
+#key *W-M = &SendText("mailaddress")
 # クリップボードを使う版
-#key *W-P = &ClipboardCopy("ぱすわーど")            &Sync C-V &Wait(5) &ClipboardCopy("")
-#key *W-M = &ClipboardCopy("めーるあどれす") &Sync C-V &Wait(5) &ClipboardCopy("")
+#key *W-P = &ClipboardCopy("password$")            &Sync C-V &Wait(5) &ClipboardCopy("")
+#key *W-M = &ClipboardCopy("mailaddress") &Sync C-V &Wait(5) &ClipboardCopy("")
 # IMEをオフにしてキー入力版
-#key *W-P = &SetImeStatus(off) &Sync &SendText("ぱすわーど")
-#key *W-M = &SetImeStatus(off) &Sync &SendText("めーるあどれす")
+#key *W-P = &SetImeStatus(off) &Sync &SendText("password$")
+#key *W-M = &SetImeStatus(off) &Sync &SendText("mailaddress")
 # SendText使わない版(FireFoxとSendTextが相性良くない、いくつかキー入力が抜けることがある）
-key *W-P = P &Sync A &Sync S &Sync S &Sync W &Sync O &Sync R &Sync D
-key *W-M = M &Sync A &Sync I &Sync L &Sync A &Sync D &Sync D &Sync R &Sync E &Sync S
+#key *W-P = P &Sync A &Sync S &Sync S
+#key *W-M = M &Sync A &Sync I &Sync L
+# SendText使わないかつwaitを使う版（&SyncだとWindowsのログオン画面でもの凄く猛烈に激烈に遅くて使いものにならない）
+#key *W-P = P &Wait(10) A &Wait(10) S &Wait(10) S
+#key *W-M = M &Wait(10) A &Wait(10) I &Wait(10) L
 
 # エクスプローラ開く
 key *W-E = W-E
@@ -124,7 +130,7 @@ key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-B =
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-C = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Comma = *S-*C-Down
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-D = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-E = 
+key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-E = &ShellExecute("open", "C:\\Program Files\\Everything\\Everything.exe",,, showNormal)
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-F = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-G = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-H = 
