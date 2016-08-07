@@ -6,7 +6,7 @@ if ( USE104 )
   endif
 else
   include "109.nodoka"
-    if ( USE104on109 )
+  if ( USE104on109 )
     include "104on109.nodoka"
   endif
 endif
@@ -15,13 +15,6 @@ if ( USEdefault )
   include "default2.nodoka"
 endif
 #-----------------------------------------------------------------------------------
-#def option UnitID = K1 0 0 0
-
-def option UnitID = K1 2131 256 0  #HHKB Pro
-def option UnitID = K2 3897 1649 0 # KBTalking pure pro 60%
-def option UnitID = K3 1133 49259 1
-def option UnitID = K4 1133 49714 0
-def option UnitID = K5 1133 50481 1
 
 # &SetText(text)の遅延ms
 def option SendTextDelay = 10
@@ -63,8 +56,13 @@ key W-H = &ShellExecute("open", "wsh\\tile_windows_h.vbs",,, showNormal)
 keymap Global
 
 # CapsLock = Control
-mod control += CapsLock
-key *CapsLock = *LeftControl
+if ( KBD109 ) 
+  mod control += 英数
+  key *英数 = *LeftControl
+else
+  mod control += CapsLock
+  key *CapsLock = *LeftControl
+endif
 
 # Shift2回押しでIMEの切り替え
 def option UseDoublePress = enable 300 10
@@ -74,10 +72,16 @@ key U-DP-RShift = &SetImeStatus(toggle)
 # =======================================================================================================================
 # [Windowsキーの調教]
 # =======================================================================================================================
-# LWin
-mod W -= LWin
-mod M0 = !LWin #真のモディファイヤに
-
+if ( KBD109 )
+  # 無変換
+  key 無変換 = 
+  mod M0 = !無変換 #真のモディファイヤに
+else
+  # LWin
+  key LWin = 
+  mod W -= LWin
+  mod M0 = !LWin #真のモディファイヤに
+endif
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-A = *S-*C-Home     # emacsっぽいカーソル操作
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-B = *S-*C-PageUp   # vimっぽいカーソル操作
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-C = 
@@ -122,8 +126,8 @@ key M0-Space = $ToggleIME
 # RWin
 # RWinの割当てを削除し、モディファイヤを再割当てする。
 key RWin = 
-mod W -= RWin
-mod M1 = RWin # 右は真のモディファイヤにはしない
+mod W -= RightWindows
+mod M1 = RightWindows # 右は真のモディファイヤにはしない
 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-A = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-B = 
@@ -145,7 +149,10 @@ key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-O = *S-*C-Up
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-P = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Period = $ToggleIME
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Q = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Quote = 
+if ( KBD109 ) 
+else
+  key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Quote = 
+endif
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-R = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-S = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Semicolon = *S-*C-End
@@ -169,8 +176,11 @@ key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_8 =
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_9 = 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_0 = 
 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-GraveAccent = W-L
 
+if ( KBD109 ) 
+else
+  key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-GraveAccent = W-L
+endif
 # LWin+RWin合わせ技系
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-RWin = RWin # LWin + RWin = Windowsキーの押下（スタートメニューを開く）
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-M1-E = W-E  # LWin+RWin+E = エクスプローラ開く
