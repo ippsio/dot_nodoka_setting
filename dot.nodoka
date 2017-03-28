@@ -15,50 +15,60 @@ if ( USEdefault )
   include "default2.nodoka"
 endif
 #-----------------------------------------------------------------------------------
-
 # &SetText(text)の遅延ms
-def option SendTextDelay = 10
+#def option SendTextDelay = 10
 
 # オプション　IME オン/オフ時のキャレット点滅時間指定
-def option CaretBlinkTime = enable 500 125
+#def option CaretBlinkTime = enable 500 125
 
 # キーリピート設定(可否、リピート開始までの時間[ms]、および、キーリピート開始後のリピート間隔[ms]）
-def option KeyboardDelay = enable 200 27
+#def option KeyboardDelay = enable 200 27
 
+# 日本語キーボードPCにUSB英語キーボード接続　かつ　レジストリを英語キーボード用に設定した時
+# 日本語キーボードのとあるキーが効かなくなるけしからん問題に対する対応
+# ※円マークとバックスラッシュ（アンダースコア）が、のどか経由で入力されなかった。
+def key YenSign Yen              =    0x7d # \|
+def key ReverseSolidus BackSlash =    0x73 # ＼_
+
+# <keyMap2設定 その１> ========================================================================================================
 keymap2 KM_PREFIX_I
-# めんどいキー入力を少し楽に
+  # めんどいキー入力を少し楽に
 
-# 単純にキー入力版
-#key *W-P = &SendText("password")
-#key *W-M = &SendText("mailaddress")
-# クリップボードを使う版
-#key *W-P = &ClipboardCopy("password$")            &Sync C-V &Wait(5) &ClipboardCopy("")
-#key *W-M = &ClipboardCopy("mailaddress") &Sync C-V &Wait(5) &ClipboardCopy("")
-# IMEをオフにしてキー入力版
-#key *W-P = &SetImeStatus(off) &Sync &SendText("password$")
-#key *W-M = &SetImeStatus(off) &Sync &SendText("mailaddress")
-# SendText使わない版(FireFoxとSendTextが相性良くない、いくつかキー入力が抜けることがある）
-#key *W-P = P &Sync A &Sync S &Sync S
-#key *W-M = M &Sync A &Sync I &Sync L
-# SendText使わないかつwaitを使う版（&SyncだとWindowsのログオン画面でもの凄く猛烈に激烈に遅くて使いものにならない）
-#key *W-P = P &Wait(10) A &Wait(10) S &Wait(10) S
-#key *W-M = M &Wait(10) A &Wait(10) I &Wait(10) L
+  # 単純にキー入力版
+  #key *W-P = &SendText("password")
+  #key *W-M = &SendText("mailaddress")
+  # クリップボードを使う版
+  #key *W-P = &ClipboardCopy("password$")            &Sync C-V &Wait(5) &ClipboardCopy("")
+  #key *W-M = &ClipboardCopy("mailaddress") &Sync C-V &Wait(5) &ClipboardCopy("")
+  # IMEをオフにしてキー入力版
+  #key *W-P = &SetImeStatus(off) &Sync &SendText("password$")
+  #key *W-M = &SetImeStatus(off) &Sync &SendText("mailaddress")
+  # SendText使わない版(FireFoxとSendTextが相性良くない、いくつかキー入力が抜けることがある）
+  #key *W-P = P &Sync A &Sync S &Sync S
+  #key *W-M = M &Sync A &Sync I &Sync L
+  # SendText使わないかつwaitを使う版（&SyncだとWindowsのログオン画面でもの凄く猛烈に激烈に遅くて使いものにならない）
+  #key *W-P = P &Wait(10) A &Wait(10) S &Wait(10) S
+  #key *W-M = M &Wait(10) A &Wait(10) I &Wait(10) L
 
-# エクスプローラ開く
-key *W-E = W-E
+  # エクスプローラ開く
+  key *W-E = W-E
+# </keyMap2設定 その１> ========================================================================================================
 
+
+# <keyMap2設定 その２> ========================================================================================================
 keymap2 KM_PREFIX_V
-# ウインドウの整列
-key W-V = &ShellExecute("open", "wsh\\tile_windows_v.vbs",,, showNormal)
-key W-H = &ShellExecute("open", "wsh\\tile_windows_h.vbs",,, showNormal)
+  # ウインドウの整列
+  key W-V = &ShellExecute("open", "wsh\\tile_windows_v.vbs",,, showNormal)
+  key W-H = &ShellExecute("open", "wsh\\tile_windows_h.vbs",,, showNormal)
+# </keyMap2設定 その２>========================================================================================================
 
 
 keymap Global
-
 # CapsLock = Control
-if ( KBD109 ) 
+if ( KBD109 )
   mod control += 英数
-  key *英数 = *LeftControl
+#  key *英数 = *LeftControl
+  key 英数 = A
 else
   mod control += CapsLock
   key *CapsLock = *LeftControl
@@ -70,44 +80,50 @@ key U-DP-LShift = &SetImeStatus(toggle)
 key U-DP-RShift = &SetImeStatus(toggle)
 
 # =======================================================================================================================
-# [Windowsキーの調教]
+# [Windowsキーと無変換キーの調教]
 # =======================================================================================================================
 if ( KBD109 )
   # 無変換
-  key 無変換 = 
-  mod M0 = !無変換 #真のモディファイヤに
+  key 無変換=
+  mod M0 = !無変換 #日本語キーとして使っている無変換のキーを、真のモディファイヤに（＝それ単体で押しても何も機能しないキーに）
 else
-  # LWin
-  key LWin = 
+  # 左Windowsキー
+  key LWin =
   mod W -= LWin
-  mod M0 = !LWin #真のモディファイヤに
+  mod M0 = !LWin #LWinのキーを、真のモディファイヤに（＝それ単体で押しても何も機能しないキーに）
+
+  # 左無変換キー(0x7b)
+  def key Muhenkan=0x7b #日本語キーとして使っている無変換のキーを、真のモディファイヤに（＝それ単体で押しても何も機能しないキーに）
+  key Muhenkan =
+  mod W -= Muhenkan
+  mod M0 += !Muhenkan
 endif
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-A = *S-*C-Home     # emacsっぽいカーソル操作
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-B = *S-*C-PageUp   # vimっぽいカーソル操作
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-C = 
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-C =
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-D = *S-*C-Delete
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-E = *S-*C-End      # emacsっぽいカーソル操作
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-F = *S-*C-PageDown
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-G = 
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-G =
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-H = *S-*C-Left     # vimっぽいカーソル操作
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-I = 
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-I =
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-J = *S-*C-Down     # vimっぽいカーソル操作
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-K = *S-*C-Up       # vimっぽいカーソル操作
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-L = *S-*C-Right    # vimっぽいカーソル操作
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-M = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-N = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-O = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-P = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-Q = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-R = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-S = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-T = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-U = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-V = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-W = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-X = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-Y = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-Z = 
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-N =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-O =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-P =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-Q =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-R =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-S =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-T =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-U =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-V =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-M =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-W =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-X =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-Y =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-Z =
 
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_1 = *S-*C-F1
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-_2 = *S-*C-F2
@@ -125,69 +141,68 @@ key M0-Space = $ToggleIME
 # =======================================================================================================================
 # RWin
 # RWinの割当てを削除し、モディファイヤを再割当てする。
-key RWin = 
-mod W -= RightWindows
-mod M1 = RightWindows # 右は真のモディファイヤにはしない
+#
+#key RWin =
+#mod W -= RightWindows
+#mod M1 = RightWindows # 右は真のモディファイヤにはしない
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-A =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-B =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-C =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Comma =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-D =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-E =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-F =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-G =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-H =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-I = $ToggleIME
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-J = *S-*C-Home
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-K =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-K = *S-*C-Left
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-L     = *S-*C-Right
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-M = $ToggleIME
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-N =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-O = *S-*C-Up
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-P =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Period = $ToggleIME
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Q =
+#if ( KBD109 )
+#else
+#  key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Quote =
+#endif
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-R =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-S =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Semicolon = *S-*C-End
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Slash =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-T =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-U =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-V =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-W =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-X =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Y =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Z =
+#
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_1 =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_2 =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_3 =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_4 =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_5 =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_6 =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_7 =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_8 =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_9 =
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_0 =
+#
+#if ( KBD109 )
+#else
+#  key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-GraveAccent = W-L
+#endif
 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-A = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-B = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-C = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Comma = *S-*C-Down
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-D = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-E = &ShellExecute("open", "C:\\Program Files\\Everything\\Everything.exe",,, showNormal)
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-F = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-G = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-H = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-I = $ToggleIME
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-J = *S-*C-Home
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-K = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-K = *S-*C-Left
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-L     = *S-*C-Right
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-M = $ToggleIME
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-N = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-O = *S-*C-Up
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-P = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Period = $ToggleIME
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Q = 
-if ( KBD109 ) 
-else
-  key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Quote = 
-endif
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-R = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-S = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Semicolon = *S-*C-End
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Slash = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-T = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-U = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-V = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-W = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-X = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Y = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-Z = 
-
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_1 = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_2 = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_3 = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_4 = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_5 = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_6 = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_7 = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_8 = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_9 = 
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-_0 = 
-
-
-if ( KBD109 ) 
-else
-  key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M1-GraveAccent = W-L
-endif
 # LWin+RWin合わせ技系
 key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-RWin = RWin # LWin + RWin = Windowsキーの押下（スタートメニューを開く）
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-M1-E = W-E  # LWin+RWin+E = エクスプローラ開く
-key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-M1-R = W-R  # LWin+RWin+R = ファイル名を指定して実行
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-M1-E = W-E  # LWin+RWin+E = エクスプローラ開く
+#key *KL-*IL-*IC-*IH-*IK-*IJ-*IW-*S-*C-M0-M1-R = W-R  # LWin+RWin+R = ファイル名を指定して実行
 
 # =======================================================================================================================
-# 2ストローク系 
+# 2ストローク系
 key M0-I = &Prefix(KM_PREFIX_I)
 key M0-V = &Prefix(KM_PREFIX_V)
-
